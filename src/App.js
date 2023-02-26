@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import AddForm from "./components/AddForm";
 import UpdateForm from "./components/UpdateForm";
 import  ToDo from "./components/ToDO"
@@ -12,6 +12,19 @@ function App() {
     // { id: 1, title: "first", status: false },
     // { id: 2, title: "second", status: false },
   ]);
+
+  //localstorage
+useEffect(()=>{
+  const getData= JSON.parse(localStorage.getItem("toDo"));
+   if(getData){
+     setToDo(getData);
+     console.log(getData);
+  }
+},[])
+useEffect(()=>{
+  localStorage.setItem('toDo', JSON.stringify(toDo))
+},[toDo]);
+
 
   //temp state
   const [newTask, setNewTask] = useState(""); //for using hold temp. data
